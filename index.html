@@ -126,20 +126,12 @@ section{position:relative}
 .hero-img{position:absolute;inset:0}
 .hero-img img{width:100%;height:100%;object-fit:cover;object-position:center 45%}
 .hero-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(25,20,19,.45) 0%,rgba(25,20,19,.05) 32%,rgba(25,20,19,.25) 58%,rgba(25,20,19,.82) 100%)}
-.hero-in{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;gap:clamp(48px,8vh,88px);padding:140px var(--gutter) 0}
+.hero-in{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:140px var(--gutter) clamp(64px,11.3vh,106px)}
 .hero-row{display:flex;justify-content:space-between;align-items:flex-start;gap:40px}
 .hero h1{font-size:clamp(48px,5.97vw,86px);line-height:1;letter-spacing:-.03em;flex:none}
 .hero-side{width:min(436px,34vw);padding-top:8px}
 .hero-side p{font-size:18px;line-height:1.55;color:rgba(255,255,255,.85);max-width:380px}
 .hero-btns{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
-.hero-strip{display:flex;justify-content:space-between;gap:24px;border-top:1px solid rgba(255,255,255,.3);padding:22px 0 28px;font:500 11px/1.4 var(--body);letter-spacing:.1em;text-transform:uppercase}
-.hero-strip span{display:flex;gap:10px;transition:color .3s}
-.hero-strip span b{font-weight:500;transition:color .3s}
-.hero-strip span:hover b{color:var(--vermilion)}
-.scroll-cue{display:inline-flex;gap:10px;align-items:center}
-.scroll-cue i{display:block;width:1px;height:18px;background:currentColor;position:relative;overflow:hidden}
-.scroll-cue i::after{content:"";position:absolute;left:0;top:-100%;width:1px;height:100%;background:var(--vermilion);animation:cue 1.8s var(--ease) infinite}
-@keyframes cue{to{top:100%}}
 
 /* ---------- intro */
 .intro{padding:136px var(--gutter) 128px}
@@ -293,7 +285,6 @@ section{position:relative}
   .stats{grid-template-columns:1fr 1fr 1fr;gap:16px}
   .hero-row{flex-direction:column}.hero-side{width:100%}
   .hero-img img{object-position:64% 45%}
-  .hero-strip{display:grid;grid-template-columns:1fr 1fr}.scroll-cue{display:none!important}
   .devs-meta{grid-template-columns:1fr;justify-items:start}.devs-ctl{justify-content:flex-start}.devs-count{justify-items:start}
   .hdr-r .btn:not(.menu-btn){display:none}
   .hero h1{font-size:clamp(44px,12vw,64px)}
@@ -341,10 +332,6 @@ section{position:relative}
           <a class="btn btn-v" href="#developments"><span>Our developments</span><span class="arr"><i>→</i><i>→</i></span></a>
         </div>
         </div>
-      </div>
-      <div class="hero-strip" id="heroStrip">
-        <span><b>01</b>Strategic Locations</span><span><b>02</b>Hospitality First</span><span><b>03</b>Global Standards</span><span><b>04</b>Distinctive Design</span>
-        <span class="scroll-cue">Scroll <i></i></span>
       </div>
     </div>
   </section>
@@ -559,7 +546,7 @@ section{position:relative}
     else {
       gsap.timeline({ onStart: stop, onComplete: start })
         .set(title.lines, { yPercent: 110 }).set('#heroImg', { scale: 1.14 })
-        .set([hdr, '#heroBtns', '#heroStrip > span'], { autoAlpha: 0 })
+        .set([hdr, '#heroBtns'], { autoAlpha: 0 })
         .to('.loader .mark', { clipPath: 'inset(0 0% 0 0)', duration: 1, ease: 'p4io' }, .1)
         .to('.loader .bar i', { scaleX: 1, duration: 1.1, ease: 'power2.inOut' }, 0)
         .to('.loader .mark, .loader .bar', { autoAlpha: 0, y: -20, duration: .35, ease: 'power2.in' }, 1.15)
@@ -568,7 +555,6 @@ section{position:relative}
         .to(title.lines, { yPercent: 0, duration: 1.1, stagger: .1, ease: 'expo' }, 1.75)
         .fromTo(hdr, { y: -24 }, { y: 0, autoAlpha: 1, duration: .7, ease: 'expo' }, 2)
         .fromTo('#heroBtns', { y: 28 }, { y: 0, autoAlpha: 1, duration: .8, ease: 'p4io' }, 2.15)
-        .fromTo('#heroStrip > span', { y: 14 }, { y: 0, autoAlpha: 1, duration: .7, stagger: .07, ease: 'p4io' }, 2.35)
         .set('.loader', { display: 'none' });
     }
     if (reduced) { buildDevs(); return; }
